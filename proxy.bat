@@ -3,14 +3,8 @@
 
 echo Ejecutando ssh-keygen, espere y presione enter 3 veces para continuar...
 ssh-keygen
-echo ---------------------------------------------------------------------------
-echo Se genero la llave pública, copiela y pegala en el brwoser https://globaldevtools.bbva.com/bitbucket/plugins/servlet/ssh/account/keys
-echo ---------------------------------------------------------------------------
-cat ~/.ssh/id_rsa.pub
-echo ---------------------------------------------------------------------------
-start chrome https://globaldevtools.bbva.com/bitbucket/plugins/servlet/ssh/account/keys 
 
-echo Copiando archivos de configuración
+echo Copiando archivos de configuracion
 if not exist "C:\Users\%username%\AppData\Local\Programs\Git" (
 	REM Git instalado com administrador
 	MKDIR "C:\Users\%username%\AppData\Local\Programs\Git"
@@ -28,14 +22,20 @@ echo Creando config
 	echo TCPKeepAlive yes
 	echo IdentitiesOnly yes
 ) > "C:\Users\%username%\.ssh\config"
-REM COPY config "C:\Users\%username%\.ssh\"
 COPY .bashrc "C:\Users\%username%\"
 
-echo Grabando configuración GIT
+echo Grabando configuracion GIT
 git config --global http.sslVerify false
 git config --global http.proxy http://%username%@118.180.54.170:8080
 
-echo Cierre el Git Bash y pruebe la configuración
+echo ---------------------------------------------------------------------------
+echo Se genero la llave publica, copiela y pegala en el browser https://globaldevtools.bbva.com/bitbucket/plugins/servlet/ssh/account/keys/add
+echo ---------------------------------------------------------------------------
+cat ~/.ssh/id_rsa.pub
+echo ---------------------------------------------------------------------------
+start chrome https://globaldevtools.bbva.com/bitbucket/plugins/servlet/ssh/account/keys/add 
+
+echo Cierre el Git Bash y pruebe la configuracion
 
 pause
 exit
